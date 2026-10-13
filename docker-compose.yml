@@ -1,0 +1,20 @@
+﻿name: ${PROJECT_NAME}-mongodb
+
+services:
+  mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME}-mongodb
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./volume/data:/data/db
+    networks:
+      - template_network
+
+networks:
+  template_network:
+    external: true
+    name: ${PROJECT_NAME}-network
